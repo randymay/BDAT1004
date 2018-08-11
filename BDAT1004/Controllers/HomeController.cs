@@ -16,16 +16,16 @@ namespace BDAT1004.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult Landing1()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "";
 
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult Landing2()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "";
 
             return View();
         }
