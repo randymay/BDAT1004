@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="jQuery" Version="3.3.1" />
   </ItemGroup>
 
 </Project>
