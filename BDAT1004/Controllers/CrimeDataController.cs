@@ -288,15 +288,15 @@ namespace BDAT1004.Controllers
             FullDataModel dataRecord = new FullDataModel();
 
             // Set values in model record
-            //dataRecord.IncidentId = reader.GetInt32(0);
+            dataRecord.IncidentId = reader.GetInt64(0);
             dataRecord.CaseNumber = reader.GetString(1);
-            //dataRecord.DayOfWeek = reader.GetInt32(2);
-            //dataRecord.HourOfDay = reader.GetInt32(3);
-            //dataRecord.IncidentDateTime = reader.GetDateTime(4);
+            dataRecord.DayOfWeek = reader.GetString(2);
+            dataRecord.HourOfDay = reader.GetInt32(3);
+            dataRecord.IncidentDateTime = reader.GetDateTime(4);
             dataRecord.ParentIncidentType = reader.GetString(5);
             dataRecord.IncidentType = reader.GetString(6);
-            //dataRecord.Latitude = reader.GetFloat(7);
-            //dataRecord.Longitude = reader.GetFloat(8);
+            dataRecord.Latitude = reader.GetDouble(7);
+            dataRecord.Longitude = reader.GetDouble(8);
             dataRecord.Description = reader.GetString(9);
 
             return dataRecord;
