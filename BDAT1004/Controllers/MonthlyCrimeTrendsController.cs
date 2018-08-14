@@ -73,13 +73,13 @@ namespace BDAT1004.Controllers
 
                     // Prepare SQL
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("select crime_year, crime_month, count(case_number) as crime_count ");
-                    sb.Append("from(select year(incident_datetime) as crime_year, monthname((incident_datetime) as crime_month), case_number as case_number ");
+                    sb.Append("select crime_month, count(case_number) as crime_count ");
+                    sb.Append("from(select monthname((incident_datetime) as crime_month), case_number as case_number ");
                     sb.Append("from dbo.Crime_Data ");
                     sb.Append("where year(incident_datetime) >= 2013 ");
                     sb.Append("and year(incident_datetime) <= 2017) as year_data ");
-                    sb.Append("group by crime_year,crime_month ");
-                    sb.Append("order by crime_year,crime_month");
+                    sb.Append("group by crime_month ");
+                    sb.Append("order by crime_month");
                     String sql = sb.ToString();
 
                     // Open a Connection to the DB
@@ -97,8 +97,8 @@ namespace BDAT1004.Controllers
                                 MonthlyCrimeTrendsModel resultMonthly = new MonthlyCrimeTrendsModel();
 
                                 // Set values in model record
-                                resultMonthly.Month = reader.GetString(1);
-                                resultMonthly.CrimeCount = reader.GetInt32(2);
+                                resultMonthly.Month = reader.GetString(0);
+                                resultMonthly.CrimeCount = reader.GetInt32(1);
 
                                 // Add model record to collection
                                 resultsMonthly.Add(resultMonthly);
