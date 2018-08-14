@@ -41,23 +41,26 @@
  $(document).ready(function () {
         // Display the CrimesBy Year Graph
         var TypesOfCrimeData = $.ajax({
-            url: '/CrimesByYear/GetData',
+            url: '/TypesOfCrime/GetData',
             dataType: "json",
             async: false
         }).done(function (jsonData) {
-            console.log(jsonData);
+            //console.log(jsonData);
             // Create our data table out of JSON data loaded from server.
             var data = new google.visualization.DataTable();
-            data.addColumn('number', 'CrimeIncident');
+            data.addColumn('string', 'CrimeIncident');
             data.addColumn('number', 'CrimeCount');
 
+            var rowData = [];
             jsonData.forEach(function (row) {
                 console.log(row);
-                data.addRow([
-                    row.CrimeIncident,
-                    row.CrimeCount
-                ]);
+                var rowInfo = [];
+                rowInfo[0] = row.crimeIncident;
+                rowInfo[1] = row.crimeCount;
+                rowData.push(rowInfo);
             });
+            console.log(rowData);
+            data.addRows(rowData);
 
             // Instantiate and draw our chart, passing in some options.
             var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));

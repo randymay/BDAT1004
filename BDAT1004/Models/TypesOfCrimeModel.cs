@@ -3,7 +3,7 @@ namespace BDAT1004.Models
 {
     public class TypesOfCrimeModel
     {
-        public int CrimeIncident { get; set; } 
+        public String CrimeIncident { get; set; } 
         public int CrimeCount { get; set; } 
     }
 }

@@ -72,10 +72,10 @@ namespace BDAT1004.Controllers
                     // Prepare SQL
                     StringBuilder sb = new StringBuilder();
                     sb.Append("select crime_incident, count(case_number) as crime_count ");
-                    sb.Append("from(select year(incident_type_primary) as crime_incident, case_number as case_number ");
-                    sb.Append("from dbo.Crime_Data ");
+					sb.Append("from(select incident_type_primary as crime_incident, case_number as case_number ");
+					sb.Append("from dbo.Crime_Data) as subquery ");
                     sb.Append("group by crime_incident ");
-                    sb.Append("order by crime_incident");
+					sb.Append("order by crime_count desc ");
                     String sql = sb.ToString();
 
                     // Open a Connection to the DB
@@ -93,7 +93,7 @@ namespace BDAT1004.Controllers
                                 TypesOfCrimeModel result = new TypesOfCrimeModel();
 
                                 // Set values in model record
-                                result.CrimeIncident = reader.GetInt32(0);
+                                result.CrimeIncident = reader.GetString(0);
                                 result.CrimeCount = reader.GetInt32(1);
 
                                 // Add model record to collection
