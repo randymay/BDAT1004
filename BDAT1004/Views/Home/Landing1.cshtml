@@ -40,19 +40,19 @@
 $(document).ready(function() {
         // Display the Crimes By Year Graph
         var crimesByYearData = $.ajax({
-            url: '/CrimesByYear/GetData',
+            url: '/HourlyCrimeTrends/GetData',
             dataType: "json",
             async: false
         }).done(function(jsonData) {
             // Create our data table out of JSON data loaded from server.
             var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Year');
+            data.addColumn('number', 'Hour');
             data.addColumn('number', 'Number of Crimes');
 
             jsonData.forEach(function(row) {
                 console.log(row);
                 data.addRow([
-                    row.year + '',
+                    row.Crime_hour + '',
                     row.crimeCount
                 ]);
             });
@@ -62,7 +62,7 @@ $(document).ready(function() {
 
             // Set chart options
             var options = {
-                title: 'Number of crimes reported from 2013 to 2017',
+                title: 'Hourly Crime Trends',
                 width: 400,
                 height: 300,
                 bars: 'horizontal',
