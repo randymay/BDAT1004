@@ -74,7 +74,7 @@ namespace BDAT1004.Controllers
                     // Prepare SQL
                     StringBuilder sb = new StringBuilder();
                     sb.Append("select crime_month, count(case_number) as crime_count ");
-                    sb.Append("from(select monthname((incident_datetime) as crime_month), case_number as case_number ");
+					sb.Append("from(select datename(month, incident_datetime) as crime_month, case_number as case_number ");
                     sb.Append("from dbo.Crime_Data ");
                     sb.Append("where year(incident_datetime) >= 2013 ");
                     sb.Append("and year(incident_datetime) <= 2017) as year_data ");
