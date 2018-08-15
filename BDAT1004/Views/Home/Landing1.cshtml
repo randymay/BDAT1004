@@ -38,6 +38,7 @@
         </div>
     </div>
 </body>
+<<<<<<< HEAD
     <script type="text/javascript">
         // Set a callback to run when the Google Visualization API is loaded.
         $(document).ready(function () {
@@ -126,23 +127,44 @@
         // Display the Weekly Crimes Graph
         var crimeWeeklyData = $.ajax({
             url: '/WeeklyCrimeTrends/GetData',
+=======
+<script type="text/javascript">
+// Set a callback to run when the Google Visualization API is loaded.
+$(document).ready(function() {
+        // Display the Crimes By Year Graph
+        var crimesByYearData = $.ajax({
+            url: '/HourlyCrimeTrends/GetData',
+>>>>>>> d6a99aaaa38bda792429a441ef570d13dac56bd6
             dataType: "json",
             async: false
         }).done(function (jsonData) {
             console.log(jsonData);
             // Create our data table out of JSON data loaded from server.
+<<<<<<< HEAD
             var data4 = new google.visualization.DataTable();
             data4.addColumn('string', 'Day');
             data4.addColumn('number', 'Number of Crimes');
+=======
+            var data = new google.visualization.DataTable();
+            data.addColumn('number', 'Hour');
+            data.addColumn('number', 'Number of Crimes');
+>>>>>>> d6a99aaaa38bda792429a441ef570d13dac56bd6
 
             var rowData = [];
             jsonData.forEach(function (row) {
                 console.log(row);
+<<<<<<< HEAD
                 var rowInfo = [];
                 rowInfo[0] = row.day;
                 rowInfo[1] = row.crimeCount;
 
                 rowData.push(rowInfo);
+=======
+                data.addRow([
+                    row.Crime_hour + '',
+                    row.crimeCount
+                ]);
+>>>>>>> d6a99aaaa38bda792429a441ef570d13dac56bd6
             });
 
             data4.addRows(rowData);
@@ -152,8 +174,13 @@
 
             // Set chart options
             var options = {
+<<<<<<< HEAD
                 title: 'Weekly Crime Trends',
                 width: 600,
+=======
+                title: 'Hourly Crime Trends',
+                width: 400,
+>>>>>>> d6a99aaaa38bda792429a441ef570d13dac56bd6
                 height: 300,
                 bars: 'horizontal',
                 legend: { position: "none" }
