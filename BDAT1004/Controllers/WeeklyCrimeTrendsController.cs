@@ -73,12 +73,12 @@ namespace BDAT1004.Controllers
 
                     // Prepare SQL
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("select crime_day, crime_year, count(case_number) as crime_count ");
+                    sb.Append("select crime_day, day, count(case_number) as crime_count ");
                     sb.Append("from(select datename(dw, incident_datetime) as crime_day,year(incident_datetime) as crime_year,datepart(dw,incident_datetime) as day, case_number as case_number ");
                     sb.Append("from dbo.Crime_Data ");
                     sb.Append("where year(incident_datetime) >= 2013 ");
                     sb.Append("and year(incident_datetime) <= 2017) as year_data ");
-                    sb.Append("group by crime_day,crime_year ");
+                    sb.Append("group by crime_day, day ");
                     sb.Append("order by day");
                     String sql = sb.ToString();
 
@@ -98,7 +98,7 @@ namespace BDAT1004.Controllers
 
                                 // Set values in model record
                                 resultWeekly.Day = reader.GetString(0);
-                                resultWeekly.CrimeCount = reader.GetInt32(1);
+                                resultWeekly.CrimeCount = reader.GetInt32(2);
 
                                 // Add model record to collection
                                 resultsWeekly.Add(resultWeekly);
