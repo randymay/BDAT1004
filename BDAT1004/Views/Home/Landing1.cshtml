@@ -1,8 +1,9 @@
-﻿@{
+@{
     ViewData["Title"] = "Landing 1";
 }
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
+
 
 <p>General crime stats</p>
 
@@ -15,8 +16,10 @@
         google.load('visualization', '1.0', { 'packages': ['corechart'] });
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 <body>
+    
     <!--Divs that will hold the charts-->
     <div class="row">
         <div class="col-md-6">
@@ -27,13 +30,18 @@
         </div>
     </div>
     <div class="row">
+<<<<<<< HEAD
          <div class="col-md-6">
+=======
+        <div class="col-md-6">
+>>>>>>> b35d7a365d1dad6105f082022a41c02c901fb299
             <div id="chart_div3"></div>
         </div>
         <div class="col-md-6">
             <div id="chart_div4"></div>
         </div>
     </div>
+<<<<<<< HEAD
 </body>
 <script type="text/javascript">
 // Set a callback to run when the Google Visualization API is loaded.
@@ -48,101 +56,142 @@ $(document).ready(function() {
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Year');
             data.addColumn('number', 'Number of Crimes');
+=======
+    <script type="text/javascript">
+        // Set a callback to run when the Google Visualization API is loaded.
+        $(document).ready(function () {
+            // Display the Crimes By Year Graph
+            var crimesByYearData = $.ajax({
+                url: '/CrimesByYear/GetData',
+                dataType: "json",
+                async: false
+            }).done(function (jsonData) {
+                //console.log(jsonData);
+                // Create our data table out of JSON data loaded from server.
+                var data = new google.visualization.DataTable();
+                data.addColumn('number', 'Year');
+                data.addColumn('number', 'Number of Crimes');
 
-            jsonData.forEach(function(row) {
+                jsonData.forEach(function (row) {
+                    //console.log(row);
+                    data.addRow([
+                        row.year,
+                        row.crimeCount
+                    ]);
+                });
+
+                // Instantiate and draw our chart, passing in some options.
+                var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+
+                // Set chart options
+                var options = {
+                    title: 'Number of crimes reported from 2013 to 2017',
+                    width: 400,
+                    height: 300,
+                    bars: 'horizontal',
+                    legend: { position: "none" },
+                    vAxis: { maxValue: 10, format: '0' }
+                };
+
+                // Draw chart.
+                chart.draw(data, options);
+            }).fail(function (jq, text, err) {
+                console.log(text + ' - ' + err);
+            });
+
+            // Display the Monthly Crimes Graph
+            var crimeMonthlyData = $.ajax({
+                url: '/MonthlyCrimeTrends/GetData',
+                dataType: "json",
+                async: false
+            }).done(function (jsonData) {
+                console.log(jsonData);
+                // Create our data table out of JSON data loaded from server.
+                var data3 = new google.visualization.DataTable();
+                data3.addColumn('string', 'Month');
+                data3.addColumn('number', 'Number of Crimes');
+
+                var rowData = [];
+                jsonData.forEach(function (row) {
+                    console.log(row);
+                    var rowInfo = [];
+                    rowInfo[0] = row.month;
+                    rowInfo[1] = row.crimeCount;
+
+                    rowData.push(rowInfo);
+                });
+
+                data3.addRows(rowData);
+
+                // Instantiate and draw our chart, passing in some options.
+                var chart = new google.visualization.LineChart(document.getElementById('chart_div3'));
+
+                // Set chart options
+                var options = {
+                    title: 'Monthly Crime Trends',
+                    width: 600,
+                    height: 300,
+                    bars: 'horizontal',
+                    legend: { position: "none" }
+                };
+
+                // Draw chart.
+                chart.draw(data3, options);
+            }).fail(function (jq, text, err) {
+                console.log(text + ' - ' + err);
+            });
+        });
+
+        // Display the Weekly Crimes Graph
+        var crimeWeeklyData = $.ajax({
+            url: '/WeeklyCrimeTrends/GetData',
+            dataType: "json",
+            async: false
+        }).done(function (jsonData) {
+            console.log(jsonData);
+            // Create our data table out of JSON data loaded from server.
+            var data4 = new google.visualization.DataTable();
+            data4.addColumn('string', 'Day');
+            data4.addColumn('number', 'Number of Crimes');
+>>>>>>> b35d7a365d1dad6105f082022a41c02c901fb299
+
+            var rowData = [];
+            jsonData.forEach(function (row) {
                 console.log(row);
+<<<<<<< HEAD
                 data.addRow([
                     row.year + '',
                     row.crimeCount
                 ]);
+=======
+                var rowInfo = [];
+                rowInfo[0] = row.day;
+                rowInfo[1] = row.crimeCount;
+
+                rowData.push(rowInfo);
+>>>>>>> b35d7a365d1dad6105f082022a41c02c901fb299
             });
 
+            data4.addRows(rowData);
+
             // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div4'));
 
             // Set chart options
             var options = {
-                title: 'Number of crimes reported from 2013 to 2017',
-                width: 400,
+                title: 'Weekly Crime Trends',
+                width: 600,
                 height: 300,
                 bars: 'horizontal',
-                legend: { position: "none" },
-                vAxis: { maxValue: 10, format: '0' }
+                legend: { position: "none" }
             };
 
             // Draw chart.
-            chart.draw(data, options);
-        }).fail(function(jq, text, err) {
+            chart.draw(data4, options);
+        }).fail(function (jq, text, err) {
             console.log(text + ' - ' + err);
         });
 
-        drawChart();
-});
-
-// Callback that creates and populates a data table,
-// instantiates the pie chart, passes in the data and
-// draws it.
-function drawChart() {
-
-        // Create the data table.
-        var data2 = new google.visualization.DataTable();
-        data2.addColumn('string', 'Topping');
-        data2.addColumn('number', 'Slices');
-        data2.addRows([
-            ['Mushrooms', 3],
-            ['Onions', 1],
-            ['Olives', 15],
-            ['Zucchini', 1],
-            ['Pepperoni', 2]
-        ]);
-
-        var data3 = new google.visualization.DataTable();
-        data3.addColumn('string', 'Year');
-        data3.addColumn('number', 'Sales');
-        data3.addColumn('number', 'Expenses');
-        data3.addRows([
-            ['2004', 1000, 400],
-            ['2005', 1170, 460],
-            ['2006', 860, 580],
-            ['2007', 1030, 540]
-        ]);
-
-        var data4 = new google.visualization.DataTable();
-        data4.addColumn('string', 'Year');
-        data4.addColumn('number', 'Sales');
-        data4.addColumn('number', 'Expenses');
-        data4.addRows([
-            ['2004', 1000, 400],
-            ['2005', 1170, 460],
-            ['2006', 860, 580],
-            ['2007', 1030, 540]
-        ]);
-
-        // Set chart options
-        var options2 = {
-            'title': 'Compare crimes per month in 2017 and 2016 ',
-            'width': 400,
-            'height': 300
-        };
-        // Set chart options
-        var options3 = {
-            'title': 'Overall monthly trend in crimes',
-            'width': 400,
-            'height': 300
-        };
-
-        var options4 = {
-            'title': 'Weekly trend in crimes',
-            'width': 400,
-            'height': 300
-        };
-        // Instantiate and draw our chart, passing in some options.
-        var chart2 = new google.visualization.ColumnChart(document.getElementById('chart_div2'));
-        chart2.draw(data2, options2);
-        var chart3 = new google.visualization.LineChart(document.getElementById('chart_div3'));
-        chart3.draw(data3, options3);
-        var chart4 = new google.visualization.LineChart(document.getElementById('chart_div4'));
-        chart4.draw(data4, options4);
-}</script>
-
+    </script>
+</body>
 </html>
