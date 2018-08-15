@@ -292,7 +292,7 @@ namespace BDAT1004.Controllers
             dataRecord.CaseNumber = reader.GetString(1);
             dataRecord.DayOfWeek = reader.GetString(2);
             dataRecord.HourOfDay = reader.GetInt32(3);
-            dataRecord.IncidentDateTime = reader.GetDateTime(4);
+            dataRecord.IncidentDateTime = reader.GetString(4);
             dataRecord.ParentIncidentType = reader.GetString(5);
             dataRecord.IncidentType = reader.GetString(6);
             dataRecord.Latitude = reader.GetDouble(7);
