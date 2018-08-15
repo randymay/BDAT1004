@@ -7,7 +7,7 @@ namespace BDAT1004.Models
         public String CaseNumber { get; set; } 
         public String DayOfWeek { get; set; } 
         public long HourOfDay { get; set; } 
-        public DateTime IncidentDateTime { get; set; } 
+        public String IncidentDateTime { get; set; } 
         public String ParentIncidentType { get; set; } 
         public String IncidentType { get; set; } 
         public double Latitude { get; set; } 
