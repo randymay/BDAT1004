@@ -14,4 +14,22 @@
 >>>>>>> b35d7a365d1dad6105f082022a41c02c901fb299
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Home\Top5CrimesHourlyTrends.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Home\Top5Crimes.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Home\OverallWeeklyTrends.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Home\OverallMonthlyTrends.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Home\CrimeTrends.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>
