@@ -6,7 +6,6 @@
 
 <p>General crime stats</p>
 
-
 <html>
 <head>
     <!--Load the AJAX API-->
@@ -77,7 +76,7 @@
             });
         
             // Display the Monthly Crimes Graph
-            var crimeMonthyData = $.ajax({
+            var crimeMonthlyData = $.ajax({
                 url: '/MonthlyCrimeTrends/GetData',
                 dataType: "json",
                 async: false
@@ -118,7 +117,49 @@
                 console.log(text + ' - ' + err);
             });
         });
+
+        // Display the Weekly Crimes Graph
+        var crimeWeeklyData = $.ajax({
+            url: '/WeeklyCrimeTrends/GetData',
+            dataType: "json",
+            async: false
+        }).done(function (jsonData) {
+            console.log(jsonData);
+            // Create our data table out of JSON data loaded from server.
+            var data4 = new google.visualization.DataTable();
+            data4.addColumn('string', 'Day');
+            data4.addColumn('number', 'Number of Crimes');
+
+            var rowData = [];
+            jsonData.forEach(function (row) {
+                console.log(row);
+                var rowInfo = [];
+                rowInfo[0] = row.day;
+                rowInfo[1] = row.crimeCount;
+
+                rowData.push(rowInfo);
+            });
+
+            data4.addRows(rowData);
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div4'));
+
+            // Set chart options
+            var options = {
+                title: 'Weekly Crime Trends',
+                width: 600,
+                height: 300,
+                bars: 'horizontal',
+                legend: { position: "none" }
+            };
+
+            // Draw chart.
+            chart.draw(data4, options);
+        }).fail(function (jq, text, err) {
+            console.log(text + ' - ' + err);
+        });
+       
     </script>
-    
-</body>
+  </body>
 </html>

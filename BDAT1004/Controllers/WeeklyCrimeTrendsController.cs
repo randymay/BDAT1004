@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace BDAT1004.Controllers
 {
     public class WeeklyCrimeTrendsController : Controller
-
     {
         #region Get data method.  
         /// <summary>  
@@ -70,17 +69,17 @@ namespace BDAT1004.Controllers
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
                     Console.WriteLine("\nQuery data example:");
-                    Console.WriteLine("=========================================\n"); 
+                    Console.WriteLine("=========================================\n");
 
                     // Prepare SQL
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("select crime_year, crime_day, count(case_number) as crime_count ");
-                    sb.Append("from(select year(incident_datetime) as crime_year, dayname((incident_datetime) as crime_day), case_number as case_number ");
+                    sb.Append("select crime_day, crime_year, count(case_number) as crime_count ");
+                    sb.Append("from(select datename(dw, incident_datetime) as crime_day,year(incident_datetime) as crime_year,datepart(dw,incident_datetime) as day, case_number as case_number ");
                     sb.Append("from dbo.Crime_Data ");
                     sb.Append("where year(incident_datetime) >= 2013 ");
                     sb.Append("and year(incident_datetime) <= 2017) as year_data ");
-                    sb.Append("group by crime_year,crime_day ");
-                    sb.Append("order by crime_year,crime_day");
+                    sb.Append("group by crime_day,crime_year ");
+                    sb.Append("order by day");
                     String sql = sb.ToString();
 
                     // Open a Connection to the DB
@@ -98,8 +97,8 @@ namespace BDAT1004.Controllers
                                 WeeklyCrimeTrendsModel resultWeekly = new WeeklyCrimeTrendsModel();
 
                                 // Set values in model record
-                                resultWeekly.Day = reader.GetString(1);
-                                resultWeekly.CrimeCount = reader.GetInt32(2);
+                                resultWeekly.Day = reader.GetString(0);
+                                resultWeekly.CrimeCount = reader.GetInt32(1);
 
                                 // Add model record to collection
                                 resultsWeekly.Add(resultWeekly);
