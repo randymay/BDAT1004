@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewData["Title"] = "Home Page";
 }
 <style>
@@ -26,14 +26,11 @@
     <img src="http://www.johnrwittphotography.com/wp-content/gallery/buffalo-city/CityHall_night_2_4_16-2670s-33.jpg" alt="BuffaloCityCrimeStatistics" style="width:100%;height:542px;">
     <div class="centered">Buffalo City Crime Data Portal is intended to analyse the crime rates in the city</div>
 </div>
-    <a asp-area="" asp-controller="Home" asp-action="Landing1"></a>
-    <a asp-area="" asp-controller="Home" asp-action="Landing2"></a>
-    
     <h1 style="color:#000080;">CRIME STATISTICS </h1>
         <div class="row">
             <div class="col-md-3">
                 <h2>
-                    <a href="/Home/CrimeTrends">
+                    <a asp-area="" asp-controller="Home" asp-action="CrimesByYear">
                         <br>
                         <img src="https://image.ibb.co/kaut89/1.jpg" alt="1" style="width:200px;height:200px" ;>
                     </a>
@@ -69,7 +66,7 @@
             </div>
             <div class="col-md-3">
                 <h2>
-                    <a href="/Home/Top5CrimesourlyTrends">
+                    <a href="/Home/Top5CrimesHourlyTrends">
                         <br>
                         <img src="https://image.ibb.co/iOrjFp/5.jpg" alt="1" style="width:200px;height:200px" ;>
                     </a>

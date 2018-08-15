@@ -30,33 +30,14 @@
         </div>
     </div>
     <div class="row">
-<<<<<<< HEAD
-         <div class="col-md-6">
-=======
         <div class="col-md-6">
->>>>>>> b35d7a365d1dad6105f082022a41c02c901fb299
             <div id="chart_div3"></div>
         </div>
         <div class="col-md-6">
             <div id="chart_div4"></div>
         </div>
     </div>
-<<<<<<< HEAD
 </body>
-<script type="text/javascript">
-// Set a callback to run when the Google Visualization API is loaded.
-$(document).ready(function() {
-        // Display the Crimes By Year Graph
-        var crimesByYearData = $.ajax({
-            url: '/CrimesByYear/GetData',
-            dataType: "json",
-            async: false
-        }).done(function(jsonData) {
-            // Create our data table out of JSON data loaded from server.
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Year');
-            data.addColumn('number', 'Number of Crimes');
-=======
     <script type="text/javascript">
         // Set a callback to run when the Google Visualization API is loaded.
         $(document).ready(function () {
@@ -153,23 +134,15 @@ $(document).ready(function() {
             var data4 = new google.visualization.DataTable();
             data4.addColumn('string', 'Day');
             data4.addColumn('number', 'Number of Crimes');
->>>>>>> b35d7a365d1dad6105f082022a41c02c901fb299
 
             var rowData = [];
             jsonData.forEach(function (row) {
                 console.log(row);
-<<<<<<< HEAD
-                data.addRow([
-                    row.year + '',
-                    row.crimeCount
-                ]);
-=======
                 var rowInfo = [];
                 rowInfo[0] = row.day;
                 rowInfo[1] = row.crimeCount;
 
                 rowData.push(rowInfo);
->>>>>>> b35d7a365d1dad6105f082022a41c02c901fb299
             });
 
             data4.addRows(rowData);
@@ -193,5 +166,4 @@ $(document).ready(function() {
         });
 
     </script>
-</body>
 </html>

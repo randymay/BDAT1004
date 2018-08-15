@@ -48,6 +48,20 @@ namespace BDAT1004.Controllers
             return View();
         }
 
+        public IActionResult CrimesByYear()
+        {
+            ViewData["Message"] = "";
+
+            return View();
+        }
+
+        public IActionResult HourlyTrends()
+        {
+            ViewData["Message"] = "";
+
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

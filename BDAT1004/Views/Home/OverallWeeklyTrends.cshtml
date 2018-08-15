@@ -1,1 +1,68 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Weekly Crime Trends";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<p>General Crime Stats</p>
+
+<html>
+<head>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">// Load the Visualization API and the piechart package.
+google.load('visualization', '1.0', { 'packages': ['corechart'] });</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <!--Divs that will hold the charts-->
+    <div class="row">
+        <div class="col-md-10">
+            <div id="chart_div"></div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">// Set a callback to run when the Google Visualization API is loaded.
+$(document).ready(function() {
+      // Display the Weekly Crimes Graph
+    var crimeWeeklyData = $.ajax({
+            url: '/WeeklyCrimeTrends/GetData',
+            dataType: "json",
+            async: false
+    }).done(function(jsonData) {
+            console.log(jsonData);
+            // Create our data table out of JSON data loaded from server.
+            var data4 = new google.visualization.DataTable();
+            data4.addColumn('string', 'Day');
+            data4.addColumn('number', 'Number of Crimes');
+
+            var rowData = [];
+            jsonData.forEach(function(row) {
+                console.log(row);
+                var rowInfo = [];
+                rowInfo[0] = row.day;
+                rowInfo[1] = row.crimeCount;
+
+                rowData.push(rowInfo);
+            });
+
+            data4.addRows(rowData);
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+            // Set chart options
+            var options = {
+                title: 'Weekly Crime Trends',
+                height: 400,
+                bars: 'horizontal',
+                legend: { position: "none" }
+            };
+
+            // Draw chart.
+            chart.draw( data4, options);
+    });
+        });
+</script>
+</html>

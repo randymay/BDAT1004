@@ -1,1 +1,73 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Top 5 Crimes by Hour";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+<p>Analysis of top 5 crimes </p>
+<html>
+<head>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">// Load the Visualization API and the piechart package.
+google.load('visualization', '1.0', { 'packages': ['corechart'] });</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <!--Divs that will hold the charts-->
+    <div class="row">
+        <div class="col-md-10">
+            <div id="chart_div"></div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">// Set a callback to run when the Google Visualization API is loaded.
+$(document).ready(function() {
+        // Display the Crimes By Year Graph
+        var top5CrimesHourData = $.ajax({
+            url: '/Top5CrimesByHour/GetData',
+            dataType: "json",
+            async: false
+        }).done(function(jsonData) {
+            // Create our data table out of JSON data loaded from server.
+            var data = new google.visualization.DataTable();
+
+            // Add dynamic column headers
+            $.each(jsonData.columnHeaders, function(index, value) {
+                if (index == 0) {
+                    data.addColumn('string', value);
+                } else {
+                    data.addColumn('number', value);
+                }
+            });
+
+            var rowData = [];
+            // Add dynamic data
+            $.each(jsonData.columnValues, function(index, value) {
+                var row = [];
+                row[0] = value.year + '';
+                row[1] = value.crimeHour1;
+                row[2] = value.crimeHour2;
+                row[3] = value.crimeHour3;
+                row[4] = value.crimeHour4;
+                row[5] = value.crimeHour5;
+                rowData.push(row);
+            });
+            data.addRows(rowData);
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+            // Set chart options
+            var options = {
+                'title': 'Hours of crime for the top 5 crimes',
+                chartArea: { width: "60%", height: "70%" }
+            };
+
+            // Draw chart.
+            chart.draw(data, options);
+        }).fail(function(jq, text, err) {
+            console.log(text + ' - ' + err);
+        });
+});
+</script>
+</html>
