@@ -4,7 +4,8 @@
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
-<p>Analysis of top 5 crimes </p>
+<p>Analysis of top 5 crimes</p>
+
 
 <html>
 <head>
@@ -12,7 +13,12 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
     // Load the Visualization API and the piechart package.
+<<<<<<< HEAD
     google.load('visualization', '1.0', { 'packages': ['corechart'] });</script>
+=======
+        google.load('visualization', '1.0', { 'packages': ['corechart'] });
+    </script>
+>>>>>>> 6bede3cf0bcd7b85c8fb77840bdc7177d49de654
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
@@ -34,6 +40,7 @@
         </div>
     </div>
 </body>
+<<<<<<< HEAD
 <script type="text/javascript">// Set a callback to run when the Google Visualization API is loaded.
 $(document).ready(function() {
         // Display the Crimes By Year Graph
@@ -75,15 +82,59 @@ $(document).ready(function() {
             var options = {
                 'title': 'Hours of crime for the top 5 crimes',
                 chartArea: { width: "60%", height: "70%" }
+=======
+<script type="text/javascript">
+    // Set a callback to run when the Google Visualization API is loaded.
+ $(document).ready(function () {
+        // Display the CrimesBy Year Graph
+        var TypesOfCrimeData = $.ajax({
+            url: '/TypesOfCrime/GetData',
+            dataType: "json",
+            async: false
+        }).done(function (jsonData) {
+            //console.log(jsonData);
+            // Create our data table out of JSON data loaded from server.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'CrimeIncident');
+            data.addColumn('number', 'CrimeCount');
+
+            var rowData = [];
+            jsonData.forEach(function (row) {
+                console.log(row);
+                var rowInfo = [];
+                rowInfo[0] = row.crimeIncident;
+                rowInfo[1] = row.crimeCount;
+                rowData.push(rowInfo);
+            });
+            console.log(rowData);
+            data.addRows(rowData);
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+
+            // Set chart options
+            var options = {
+                title: 'Total Number of crimes',
+                width: 400,
+                height: 300,
+                bars: 'horizontal',
+                legend: { position: "none" },
+                vAxis: { maxValue: 10, format: '0' }
+>>>>>>> 6bede3cf0bcd7b85c8fb77840bdc7177d49de654
             };
 
             // Draw chart.
             chart.draw(data, options);
+<<<<<<< HEAD
         }).fail(function(jq, text, err) {
+=======
+        }).fail(function (jq, text, err) {
+>>>>>>> 6bede3cf0bcd7b85c8fb77840bdc7177d49de654
             console.log(text + ' - ' + err);
         });
 
         drawChart();
+<<<<<<< HEAD
 });
 
 // Callback that creates and populates a data table,
@@ -103,6 +154,16 @@ function drawChart() {
             ['Pepperoni', 2]
         ]);
         // Create the data table.
+=======
+    });
+
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and
+    // draws it.
+    function drawChart() {
+
+        // Create the data table.
+>>>>>>> 6bede3cf0bcd7b85c8fb77840bdc7177d49de654
         var data2 = new google.visualization.DataTable();
         data2.addColumn('string', 'Topping');
         data2.addColumn('number', 'Slices');
@@ -125,14 +186,32 @@ function drawChart() {
             ['2007', 1030, 540]
         ]);
 
+<<<<<<< HEAD
 
         // Set chart options
         var options = {
             'title': 'Types of crime',
+=======
+        var data4 = new google.visualization.DataTable();
+        data4.addColumn('string', 'Year');
+        data4.addColumn('number', 'Sales');
+        data4.addColumn('number', 'Expenses');
+        data4.addRows([
+            ['2004', 1000, 400],
+            ['2005', 1170, 460],
+            ['2006', 860, 580],
+            ['2007', 1030, 540]
+        ]);
+
+        // Set chart options
+        var options2 = {
+            'title': 'Compare crimes per month in 2017 and 2016 ',
+>>>>>>> 6bede3cf0bcd7b85c8fb77840bdc7177d49de654
             'width': 400,
             'height': 300
         };
         // Set chart options
+<<<<<<< HEAD
         var options2 = {
             'title': 'Monthly trend of top 5 crimes',
             'width': 400,
@@ -141,10 +220,21 @@ function drawChart() {
         // Set chart options
         var options3 = {
             'title': 'Weekly trend of top 5 crimes',
+=======
+        var options3 = {
+            'title': 'Overall monthly trend in crimes',
+            'width': 400,
+            'height': 300
+        };
+
+        var options4 = {
+            'title': 'Weekly trend in crimes',
+>>>>>>> 6bede3cf0bcd7b85c8fb77840bdc7177d49de654
             'width': 400,
             'height': 300
         };
         // Instantiate and draw our chart, passing in some options.
+<<<<<<< HEAD
         var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
         chart.draw(data, options);
         var chart2 = new google.visualization.LineChart(document.getElementById('chart_div2'));
@@ -153,4 +243,14 @@ function drawChart() {
         chart3.draw(data3, options3);
 
 }</script>
+=======
+        var chart2 = new google.visualization.ColumnChart(document.getElementById('chart_div2'));
+        chart2.draw(data2, options2);
+        var chart3 = new google.visualization.LineChart(document.getElementById('chart_div3'));
+        chart3.draw(data3, options3);
+        var chart4 = new google.visualization.LineChart(document.getElementById('chart_div4'));
+        chart4.draw(data4, options4);
+    }</script>
+
+>>>>>>> 6bede3cf0bcd7b85c8fb77840bdc7177d49de654
 </html>
