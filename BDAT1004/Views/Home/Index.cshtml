@@ -1,45 +1,78 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<style>
+    .container {
+        position: relative;
+        font-family: Arial;
+    }
 
-<a asp-area="" asp-controller="Home" asp-action="Landing1">Landing 1</a>
-<a asp-area="" asp-controller="Home" asp-action="Landing2">Landing 2</a>
-<div class="row">
-    <div class="col-md-3">
-        <h2>Application Losers</h2>
-        <ul>
-            <li>Sample pages using ASP.NET Core MVC</li>
-            <li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>How to</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398600">Add a Controller and View</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699315">Manage User Secrets using Secret Manager.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699316">Use logging to log a message.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699317">Add packages using NuGet.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699319">Target development, staging or production environment.</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Overview</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518008">Conceptual overview of what is ASP.NET Core</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699320">Fundamentals of ASP.NET Core such as Startup and middleware.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398602">Working with Data</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398603">Security</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699321">Client side development</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699322">Develop on different platforms</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699323">Read more on the documentation site</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Run &amp; Deploy</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
-        </ul>
-    </div>
+    .centered {
+        position: absolute;
+        top: 50%;
+        bottom: 50%;
+        transform: translate(10%, 50%);
+        font-family: Arial;
+        font-size: 150%;
+        color: whitesmoke;
+        line-height: 2em;
+        text-shadow: 0px 3px 2px rgba(0,0,0,0.75);
+        padding-top: 30px;
+        font-weight: 800;
+    }
+</style>
+<div class="body"></div>
+<div class="container">
+    <img src="http://www.johnrwittphotography.com/wp-content/gallery/buffalo-city/CityHall_night_2_4_16-2670s-33.jpg" alt="BuffaloCityCrimeStatistics" style="width:100%;height:542px;">
+    <div class="centered">Buffalo City Crime Data Portal is intended to analyse the crime rates in the city</div>
 </div>
+    <a asp-area="" asp-controller="Home" asp-action="Landing1">Landing 1</a>
+    <a asp-area="" asp-controller="Home" asp-action="Landing2">Landing 2</a>
+    <h1 style="color:#000080;">CRIME STATISTICS </h1>
+        <div class="row">
+            <div class="col-md-3">
+                <h2>
+                    <a href="https://go.microsoft.com/fwlink/?LinkID=398600">
+                        <br>
+                        <img src="https://image.ibb.co/kaut89/1.jpg" alt="1" style="width:200px;height:200px" ;>
+                    </a>
+                </h2>
+
+            </div>
+            <div class="col-md-3">
+                <h2>
+                    <a href="https://go.microsoft.com/fwlink/?LinkID=398600">
+                        <br>
+                        <img src="https://image.ibb.co/eqXrvp/2.jpg" alt="1" style="width:200px;height:200px" ;>
+                    </a>
+                </h2>
+
+            </div>
+            <div class="col-md-3">
+                <h2>
+                    <a href="https://go.microsoft.com/fwlink/?LinkID=398600">
+                        <br>
+                        <img src="https://image.ibb.co/cztEFp/3.jpg" alt="1" style="width:200px;height:200px" ;>
+                    </a>
+                </h2>
+
+            </div>
+            <div class="col-md-3">
+                <h2>
+                    <a href="https://go.microsoft.com/fwlink/?LinkID=398600">
+                        <br>
+                        <img src="https://image.ibb.co/cekuFp/4.jpg" alt="1" style="width:200px;height:200px" ;>
+                    </a>
+                </h2>
+
+            </div>
+            <div class="col-md-3">
+                <h2>
+                    <a href="https://go.microsoft.com/fwlink/?LinkID=398600">
+                        <br>
+                        <img src="https://image.ibb.co/iOrjFp/5.jpg" alt="1" style="width:200px;height:200px" ;>
+                    </a>
+                </h2>
+
+            </div>
+        </div>

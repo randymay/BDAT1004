@@ -4,7 +4,9 @@
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
+
 <p>General crime stats</p>
+
 
 <html>
 <head>
@@ -14,8 +16,10 @@
         google.load('visualization', '1.0', { 'packages': ['corechart'] });
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 <body>
+    
     <!--Divs that will hold the charts-->
     <div class="row">
         <div class="col-md-6">
@@ -74,7 +78,7 @@
             }).fail(function (jq, text, err) {
                 console.log(text + ' - ' + err);
             });
-        
+
             // Display the Monthly Crimes Graph
             var crimeMonthlyData = $.ajax({
                 url: '/MonthlyCrimeTrends/GetData',
@@ -98,7 +102,7 @@
                 });
 
                 data3.addRows(rowData);
-        
+
                 // Instantiate and draw our chart, passing in some options.
                 var chart = new google.visualization.LineChart(document.getElementById('chart_div3'));
 
@@ -159,7 +163,7 @@
         }).fail(function (jq, text, err) {
             console.log(text + ' - ' + err);
         });
-       
+
     </script>
-  </body>
+</body>
 </html>
