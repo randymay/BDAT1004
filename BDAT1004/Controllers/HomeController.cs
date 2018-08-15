@@ -15,14 +15,33 @@ namespace BDAT1004.Controllers
             return View();
         }
 
-        public IActionResult Landing1()
+        public IActionResult CrimeTrends()
         {
             ViewData["Message"] = "";
 
             return View();
         }
 
-        public IActionResult Landing2()
+        public IActionResult OverallMonthlyTrends()
+        {
+            ViewData["Message"] = "";
+
+            return View();
+        }
+
+        public IActionResult OverallWeeklyTrends()
+        {
+            ViewData["Message"] = "";
+
+            return View();
+        }
+        public IActionResult Top5Crimes()
+        {
+            ViewData["Message"] = "";
+
+            return View();
+        }
+        public IActionResult Top5CrimesHourlyTrends()
         {
             ViewData["Message"] = "";
 
